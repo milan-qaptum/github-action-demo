@@ -1,0 +1,17 @@
+django==2.2.5
+dnspython
+pymongo[srv]
+pandas
+djangorestframework
+django-cors-headers
+celery==4.4.7
+pymongo
+facebook-sdk
+google-auth-oauthlib
+google-api-python-client
+pymongo
+redis==2.10.5
+Flask-SQLAlchemy
+pymysql
+eldar==0.0.7
+unidecode

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingest-facebook
+  namespace: argocd
+spec:
+  project: ingest-facebook
+  source:
+    repoURL: https://oauth2:L_qxTZuR-bZE49Rsiz4z@gitlab.com/intuaition-3-0/ingest-sources/ingest-facebook.git
+    targetRevision: develop
+    path: k8s
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: ingest-fb
+
+  # Sync policy
+  syncPolicy:
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).

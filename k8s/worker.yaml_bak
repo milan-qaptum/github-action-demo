@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      nodeSelector:
+        agentpool: dev
+      terminationGracePeriodSeconds: 0
+      containers:
+      - image: intuaitionrepo.azurecr.io/ingest-fb:3d8a0d724da6aa793854c21a475d53b34e00801e
+        name: worker
+        command: ["./run_celery.sh"]
+        #command: ["sleep", "100000000"]
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      imagePullSecrets:
+      - name: intuaition-acr-secret
+        

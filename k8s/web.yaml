@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: facebook
+spec:
+        # replicas: 1
+  selector:
+    matchLabels:
+      app: facebook
+  template:
+    metadata:
+      labels:
+        app: facebook
+    spec:
+      nodeSelector:
+        agentpool: develop
+      terminationGracePeriodSeconds: 0
+      containers:
+      - image: qaptum.azurecr.io/ingest-fb:e3124716a0bb43be6ae3a522b15c1f20341092d4
+        name: facebook
+        resources:
+          requests:
+            memory: "250Mi"
+            cpu: "250m"
+          limits:
+              memory: "500Mi"
+              cpu: "500m"
+        #command: ["sleep", "100000000"]
+        command: ["./facebook.sh"]
+      imagePullSecrets:
+      - name: acr-secret
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: facebook
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+spec:
+  type: ClusterIP  
+  ports:
+  - name: facebook
+    port: 8000
+  selector:
+    app: facebook
