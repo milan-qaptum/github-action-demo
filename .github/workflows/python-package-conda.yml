@@ -22,8 +22,8 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         image: nibatandukar/github-cicd
-        tags: ${{ steps.prepare.outputs.tag }}
         resgistry: docker.io
         context: .
         push: true
-        tags: nibatandukar/github-cicd:latest
+###        tags: nibatandukar/github-cicd:latest
+        tags: ${{ steps.prepare.outputs.tag }}
