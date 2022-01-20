@@ -15,9 +15,11 @@ jobs:
         resgistry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: Get smart tag
-      id: prepare
-      uses: Surgo/docker-smart-tag-action@v1
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+      with:
+        images: nibatandukar/github-cicd
     - name: Build and Push Docker Images
       uses: docker/build-push-action@v2
       with:
@@ -26,4 +28,5 @@ jobs:
         context: .
         push: true
 ###        tags: nibatandukar/github-cicd:latest
-        tags: ${{ steps.prepare.outputs.tag }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
