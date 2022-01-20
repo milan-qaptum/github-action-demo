@@ -21,13 +21,14 @@ jobs:
       with:
         images: nibatandukar/github-cicd
         tags: |
-            type=schedule
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha
+          type=sha
+       ##     type=schedule
+       ##     type=ref,event=branch
+       ##     type=ref,event=pr
+       ##     type=semver,pattern={{version}}
+       ##     type=semver,pattern={{major}}.{{minor}}
+       ##     type=semver,pattern={{major}}
+        ##    type=sha
     - name: Build and Push Docker Images
       uses: docker/build-push-action@v2
       with:
