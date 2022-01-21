@@ -47,6 +47,6 @@ jobs:
     - name: Deploy to Cluster
       run: |
         ls
-        sed -i'' -e 's/IMAGE_LABEL/${{ steps.meta.outputs.tags }}/g' /k8s/web.yaml
-        cd /k8
+        cd k8s
+        sed -i'' -e 's/IMAGE_LABEL/${{ steps.meta.outputs.tags }}/g' web.yaml
         kubectl apply -f web.yaml 
