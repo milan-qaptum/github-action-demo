@@ -48,5 +48,6 @@ jobs:
       run: |
         ls
         cd k8s
+        ls
         sed -i'' -e 's/IMAGE_LABEL/${{ steps.meta.outputs.tags }}/g' web.yaml
         kubectl apply -f web.yaml 
