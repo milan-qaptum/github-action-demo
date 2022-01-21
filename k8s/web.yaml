@@ -31,7 +31,6 @@ spec:
       - name: acr-secret
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
