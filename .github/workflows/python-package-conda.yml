@@ -39,3 +39,13 @@ jobs:
 ###        tags: nibatandukar/github-cicd:latest
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+    - name: Kubernets set context
+      uses: azure/k8s-set-context@v2
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+    - name: Deploy to Cluster
+      run: |
+        sed -i'' -e 's/IMAGE_LABEL/${{ github.sha }}/g' /k8s/deployment.yml
+        cd /k8
+        kubectl apply -f deployment.yml 
