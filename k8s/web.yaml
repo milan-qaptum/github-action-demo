@@ -16,7 +16,7 @@ spec:
         agentpool: develop
       terminationGracePeriodSeconds: 0
       containers:
-      - image: qaptum.azurecr.io/ingest-fb:e3124716a0bb43be6ae3a522b15c1f20341092d4
+      - image: nibatandukar/github-cicd:IMAGE_LABEL
         name: facebook
         resources:
           requests:
