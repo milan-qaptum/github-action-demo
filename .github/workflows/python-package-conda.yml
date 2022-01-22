@@ -36,7 +36,7 @@ jobs:
         resgistry: docker.io
         context: .
         push: true
-        tags: ${{ github.sha }}
+        tags: nibatandukar/github-cicd/${{ github.sha }}
 ###        tags: nibatandukar/github-cicd:latest
 ###        tags: ${{ steps.meta.outputs.tags }}
      ##   labels: ${{ steps.meta.outputs.labels }}
